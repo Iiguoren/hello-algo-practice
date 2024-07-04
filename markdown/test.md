@@ -55,11 +55,12 @@ int linear(int n)
 ### 平方阶$𝑂(n^2)$
 ```cpp
 int quadratic(int n) {
-int count = 0;
+    int count = 0;
 // 循环次数与数据大小 n 成平方关系
-for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-        count++;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            count++;
+        }
     }
 }
 return count
@@ -86,6 +87,7 @@ int expRecur(int n) {
 if (n == 1)
     return 1;
 return expRecur(n - 1) + expRecur(n - 1) + 1;
+}
 ```
 ### 对数阶$logn$
 ```cpp

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "listnode.h"
+#include "../include/listnode.h"
 
 class linkedlistqueue{
     private:
@@ -8,12 +8,14 @@ class linkedlistqueue{
     int queuesize;
     
     public:
-    linkedlistqueue(){
-    front=nullptr;
-     rear=nullptr; 
-     queuesize=0;
-     }
-
+    linkedlistqueue():front(nullptr), rear(nullptr), queuesize(0) {}
+    ~linkedlistqueue(){
+    while (front != nullptr){
+        listnode *tmp = front;
+        front = front->next;
+        delete tmp;
+        }
+    }
     int size(){
         return queuesize;
     }
@@ -55,7 +57,7 @@ class linkedlistqueue{
         listnode *tmp = front;
         while(tmp != nullptr)
         {
-            std::cout<<tmp->value;
+            std::cout<<tmp->value<<std::endl;
             tmp = tmp->next;
         }
     }
