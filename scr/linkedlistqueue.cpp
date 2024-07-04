@@ -58,7 +58,6 @@ class linkedlistqueue{
             std::cout<<tmp->value;
             tmp = tmp->next;
         }
-        std::cout<<std::endl;
     }
 };
 
