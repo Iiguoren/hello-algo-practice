@@ -5,7 +5,6 @@ struct listnode{
     listnode *next;
 
     listnode(int num) : value(num), next(nullptr) {};
-    ~listnode(){};
 };
 
 void insert(listnode *n0, listnode *p)
@@ -59,4 +58,9 @@ int main()
 
     listnode *node = find(n0, 3);
     std::cout<<node->value<<std::endl;
+    delete n0;
+    delete n1;
+    delete n2;
+    delete n3;
+    delete n4;
 }
