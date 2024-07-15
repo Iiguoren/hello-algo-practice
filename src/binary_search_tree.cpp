@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 struct TreeNode {
@@ -30,8 +31,10 @@ class BinarySearchTree{
     }
 
     void insert(int val){
-        if(root == nullptr)
+        if(root == nullptr){
             root =  new TreeNode(val);
+            return;
+        }
         TreeNode *pre = nullptr, *cur = root;
         while(cur != nullptr){
             pre = cur;
@@ -85,4 +88,41 @@ class BinarySearchTree{
             cur->val = tmpval;
         }
     }
+
+    vector<int> levelorder(){
+    queue<TreeNode *> queue;
+    queue.push(root);
+    vector<int> vec;
+    while(!queue.empty()){
+        TreeNode *node = queue.front();
+        queue.pop();
+        vec.push_back(node->val);
+        if(node->left!=nullptr){
+            queue.push(node->left);
+        }
+        if(node->right!=nullptr){
+            queue.push(node->right);
+        }
+    }
+    return vec;
+}
 };  
+
+int main(){
+    BinarySearchTree tree = BinarySearchTree();
+    tree.insert(5);
+    TreeNode *node = tree.search(1);
+
+    tree.insert(6);
+
+    tree.insert(2);
+    tree.insert(1);
+    tree.insert(3);
+    node = tree.search(5);
+    cout<<node->val<<endl;
+    vector<int> vec = tree.levelorder();
+    for(int i=0; i<vec.size(); i++)
+        cout<<vec[i]<<" !";
+    cout<<endl;
+
+}

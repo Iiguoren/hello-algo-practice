@@ -18,6 +18,7 @@ class ArrayBineryTree{
 
     int val(int i){
         if(i<0||i>=tree.size()) //不加=会使size号节点为负的最大值出现
+        //if(i<0||i>tree.size()-1) 
             return INT_MAX;
         return tree[i];
     }
@@ -83,7 +84,7 @@ int main(){
         cout<<vec[i]<<" ";
     cout<<endl;
     vec = tree.postorder();
-        cout<<"inorder:"<<endl;
+        cout<<"postorder:"<<endl;
     for(int i=0; i<vec.size(); i++)
         cout<<vec[i]<<" ";
     cout<<endl;
