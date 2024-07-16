@@ -2,20 +2,20 @@
 #include <vector>
 using namespace std;
 
-class MaxHeap{
+class Maxheap{
     private:
     vector<int> maxHeap;
 
     public:
 
-    MaxHeap(vector<int> nums) {
+    Maxheap(vector<int> nums) {
     // 将列表元素原封不动添加进堆
         maxHeap = nums;
     // 堆化除叶节点以外的其他所有节点
     for (int i = parent(size() - 1); i >= 0; i--) {
         siftdown(i);
+        }
     }
-}
 
     int left(int i){
         return 2*i+1;
@@ -70,10 +70,22 @@ class MaxHeap{
         }
     }
 
-    int pop(){
+    void pop(){
         swap(0, size()-1);
         maxHeap.pop_back();
         siftdown(0);
     }
 
+    void print(){
+        for(int i = 0; i<size(); i++)
+            cout<<maxHeap[i]<<" ";
+        cout<<endl;
+    }
+
 };
+
+int main(){
+    vector<int> vec= {5 , 1, 7, 2, 8, 6};
+    Maxheap heap = Maxheap(vec);
+    heap.print();
+}
