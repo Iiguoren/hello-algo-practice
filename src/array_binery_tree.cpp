@@ -12,7 +12,7 @@ class ArrayBineryTree{
         tree = arr;
     }
 
-    size(){
+    int size(){
         return tree.size();
     }
 
