@@ -83,14 +83,33 @@ vector<vertices *> BFS(vertices *startvert, GraphAdjList &graph){
         while(!que.empty()){
             vertices *vert = que.front();
             que.pop();
-            for(auto adjvet:graph.adjverts[vert]){
+            res.push_back(vert);
+            for(auto adjvet:graph.adjverts(vert)){
                 if(visited.count(adjvet))
                     continue;
                 que.push(adjvet);
+                visited.emplace(adjvet);
             }
         }
         return res;
     }
+
+void dfs(vertices *vert, GraphAdjList &graph, unordered_set<vertices*>&visited, vector<vertices*> &res){ //注意引用
+    res.push_back(vert);
+    visited.emplace(vert);
+    for(auto adjvet:graph.adjverts(vert)){
+                if(visited.count(adjvet))
+                    continue;
+                dfs(adjvet, graph, visited, res);
+                }   
+}    
+
+vector<vertices *> DFS(vertices *start, GraphAdjList &graph){
+    vector<vertices*> res;
+    unordered_set<vertices*>visited;
+    dfs(start, graph, visited, res);
+    return res;
+}
 
 int main(){
     vertices *vert1 =new vertices(1);
@@ -105,9 +124,24 @@ int main(){
         {vert4, vert1}
         };
     GraphAdjList graph = GraphAdjList(edges);
-   // graph.print();
+    graph.print();
     vector<vertices*> res= BFS(vert1,graph);
+    cout<<"BFS:"<<endl;
     for(int i=0; i<res.size();i++)
         cout<<res[i]->index<<" ";
+    cout<<endl;
+
+    vector<vector<vertices *>> edges_2= {
+        {vert1, vert2},
+        {vert2, vert3},
+        {vert3, vert1},
+        {vert2, vert4}
+        };
+    GraphAdjList graph_2 = GraphAdjList(edges_2);
+    graph_2.print();
+    vector<vertices*> res_2= DFS(vert1,graph_2);
+    cout<<"DFS:"<<endl;
+    for(int i=0; i<res_2.size();i++)
+        cout<<res_2[i]->index<<" ";
     cout<<endl;
 }
