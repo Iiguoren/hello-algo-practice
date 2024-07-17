@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
+#include <queue>
 using namespace std;
 struct vertices
 {
@@ -42,6 +44,9 @@ class GraphAdjList{
         }
     }
 
+    vector<vertices*> adjverts( vertices* vert){
+        return map[vert];
+    }
     void removeVert(vertices *vert){
         if(!map.count(vert))
             return;
@@ -66,7 +71,26 @@ class GraphAdjList{
             cout<<endl;
         }
     }
+
 };
+
+vector<vertices *> BFS(vertices *startvert, GraphAdjList &graph){
+        vector<vertices*> res;
+        unordered_set<vertices*>visited = {startvert};
+        queue<vertices*> que;
+
+        que.push(startvert);
+        while(!que.empty()){
+            vertices *vert = que.front();
+            que.pop();
+            for(auto adjvet:graph.adjverts[vert]){
+                if(visited.count(adjvet))
+                    continue;
+                que.push(adjvet);
+            }
+        }
+        return res;
+    }
 
 int main(){
     vertices *vert1 =new vertices(1);
@@ -81,5 +105,9 @@ int main(){
         {vert4, vert1}
         };
     GraphAdjList graph = GraphAdjList(edges);
-    graph.print();
+   // graph.print();
+    vector<vertices*> res= BFS(vert1,graph);
+    for(int i=0; i<res.size();i++)
+        cout<<res[i]->index<<" ";
+    cout<<endl;
 }
