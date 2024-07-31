@@ -1,5 +1,5 @@
 #include <iostream>
-#include "listnode.h"
+#include "../include/listnode.h"
 
 class linkedlistStack{
     private:
@@ -58,4 +58,5 @@ int main(){
     stack.push(2);
     stack.push(3);
     stack.printstack();
+
 }
